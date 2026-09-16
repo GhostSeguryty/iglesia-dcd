@@ -18,12 +18,12 @@
         <span id="brand-name">Discipulado Cristiano de Durango</span>
       </a>
       <nav class="nav" id="main-nav">
-        <a href="#inicio">Inicio</a>
-        <a href="#horarios">Horarios</a>
-        <a href="#eventos">Eventos</a>
-        <a href="#nosotros">Nosotros</a>
-        <a href="#oracion">Oración</a>
-        <a href="#contacto">Contacto</a>
+        <a href="#inicio" id="nav-inicio">Inicio</a>
+        <a href="#horarios" id="nav-horarios">Horarios</a>
+        <a href="#eventos" id="nav-eventos">Eventos</a>
+        <a href="#nosotros" id="nav-nosotros">Nosotros</a>
+        <a href="#oracion" id="nav-oracion">Oración</a>
+        <a href="#contacto" id="nav-contacto">Contacto</a>
       </nav>
       <div class="auth-mini" id="auth-mini">
         <button class="linkish" id="open-login">Acceso</button>
@@ -51,7 +51,7 @@
   <section class="hero" id="inicio">
     <div class="hero-overlay"></div>
     <div class="wrap hero-content">
-      <p class="eyebrow">Iglesia en Durango</p>
+      <p class="eyebrow" id="hero-eyebrow">Iglesia en Durango</p>
       <h1 id="hero-title">Discipulado Cristiano de Durango</h1>
       <p class="tagline" id="hero-tagline">Una familia que camina con Cristo</p>
       <blockquote class="verse-hero">
@@ -59,8 +59,8 @@
         <cite id="hero-ref"></cite>
       </blockquote>
       <div class="hero-actions">
-        <a class="btn btn-gold" href="#horarios">Ver horarios</a>
-        <a class="btn btn-light" href="#eventos">Próximos eventos</a>
+        <a class="btn btn-gold" href="#horarios" id="btn-horarios">Ver horarios</a>
+        <a class="btn btn-light" href="#eventos" id="btn-eventos">Próximos eventos</a>
       </div>
     </div>
   </section>
@@ -69,16 +69,16 @@
 
   <section class="section" id="horarios">
     <div class="wrap">
-      <h2>Horarios de la semana</h2>
-      <p class="lead">Hay un espacio para cada edad y para toda la familia.</p>
+      <h2 id="title-horarios">Horarios de la semana</h2>
+      <p class="lead" id="lead-horarios">Hay un espacio para cada edad y para toda la familia.</p>
       <div class="cards" id="schedule-grid"></div>
     </div>
   </section>
 
   <section class="section alt" id="eventos">
     <div class="wrap">
-      <h2>Próximos eventos</h2>
-      <p class="lead">El pastor y el administrador pueden actualizar esta sección cuando quieran.</p>
+      <h2 id="title-eventos">Próximos eventos</h2>
+      <p class="lead" id="lead-eventos">El pastor y el administrador pueden actualizar esta sección cuando quieran.</p>
       <div class="cards" id="events-grid"></div>
     </div>
   </section>
@@ -86,12 +86,12 @@
   <section class="section" id="nosotros">
     <div class="wrap two-col">
       <div>
-        <h2>Quiénes somos</h2>
+        <h2 id="title-nosotros">Quiénes somos</h2>
         <p id="about-text"></p>
         <div class="pastor-card">
           <div class="pastor-photo" id="pastor-photo">✝</div>
           <div>
-            <p class="eyebrow">Pastor</p>
+            <p class="eyebrow" id="label-pastor">Pastor</p>
             <h3 id="pastor-name">Lic. Otto Hugo Magallan</h3>
             <p id="pastor-bio"></p>
           </div>
@@ -103,8 +103,8 @@
 
   <section class="section goldish" id="oracion">
     <div class="wrap narrow">
-      <h2>Peticiones de oración</h2>
-      <p class="lead">Déjanos tu petición. El equipo pastoral la verá en el panel.</p>
+      <h2 id="title-oracion">Peticiones de oración</h2>
+      <p class="lead" id="lead-oracion">Déjanos tu petición. El equipo pastoral la verá en el panel.</p>
       <form id="prayer-form" class="form">
         <input type="text" id="prayer-name" placeholder="Tu nombre" required minlength="2">
         <textarea id="prayer-msg" rows="4" placeholder="¿Por qué quieres que oremos?" required minlength="4"></textarea>
@@ -115,7 +115,7 @@
 
   <section class="section" id="contacto">
     <div class="wrap">
-      <h2>Contacto y ubicación</h2>
+      <h2 id="title-contacto">Contacto y ubicación</h2>
       <div class="contact-grid">
         <div class="contact-card">
           <p><strong>Dirección</strong></p>

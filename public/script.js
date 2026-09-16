@@ -75,6 +75,26 @@
     const verses = site.verses || [];
     const ticker = verses.map((v) => `${v.text} — ${v.ref}`).join('   ·   ');
     document.getElementById('verse-ticker').innerHTML = '<span>' + esc(ticker + '   ·   ' + ticker) + '</span>';
+
+    const set = (id, val) => { const el = document.getElementById(id); if (el && val) el.textContent = val; };
+    set('nav-inicio', site.navInicio);
+    set('nav-horarios', site.navHorarios);
+    set('nav-eventos', site.navEventos);
+    set('nav-nosotros', site.navNosotros);
+    set('nav-oracion', site.navOracion);
+    set('nav-contacto', site.navContacto);
+    set('hero-eyebrow', site.heroEyebrow);
+    set('btn-horarios', site.btnHorarios);
+    set('btn-eventos', site.btnEventos);
+    set('title-horarios', site.titleHorarios);
+    set('lead-horarios', site.leadHorarios);
+    set('title-eventos', site.titleEventos);
+    set('lead-eventos', site.leadEventos);
+    set('title-nosotros', site.titleNosotros);
+    set('label-pastor', site.labelPastor);
+    set('title-oracion', site.titleOracion);
+    set('lead-oracion', site.leadOracion);
+    set('title-contacto', site.titleContacto);
   }
 
   function renderEvents() {
@@ -225,6 +245,24 @@
     }
   };
 
+  function schRow(i, x) {
+    x = x || {};
+    return `<div class="prayer-row sch-item">
+      <input class="sch-day" value="${esc(x.day || '')}" placeholder="Día (Lunes)">
+      <input class="sch-time" value="${esc(x.time || '')}" placeholder="Hora">
+      <input class="sch-title" value="${esc(x.title || '')}" placeholder="Nombre (ej. Estudio general)">
+      <input class="sch-place" value="${esc(x.place || '')}" placeholder="Lugar">
+      <input class="sch-note" value="${esc(x.note || '')}" placeholder="Nota">
+    </div>`;
+  }
+  function verseRow(i, v) {
+    v = v || {};
+    return `<div class="prayer-row verse-item">
+      <textarea class="v-text" rows="2" placeholder="Texto RVR">${esc(v.text || '')}</textarea>
+      <input class="v-ref" value="${esc(v.ref || '')}" placeholder="Cita (ej. Juan 3:16 RVR 1909)">
+    </div>`;
+  }
+
   function field(id, label, val, area) {
     return `<label>${label}</label>${area
       ? `<textarea id="${id}" rows="3">${esc(val || '')}</textarea>`
@@ -251,11 +289,44 @@
         ${field('f-wa', 'WhatsApp', s.whatsapp)}
         ${field('f-fb', 'Facebook', s.facebook)}
         ${field('f-ig', 'Instagram', s.instagram)}
+        <h4>Nombres del menú y títulos (cámbialos todos)</h4>
+        ${field('f-nav1', 'Menú: Inicio', s.navInicio || 'Inicio')}
+        ${field('f-nav2', 'Menú: Horarios', s.navHorarios || 'Horarios')}
+        ${field('f-nav3', 'Menú: Eventos', s.navEventos || 'Eventos')}
+        ${field('f-nav4', 'Menú: Nosotros', s.navNosotros || 'Nosotros')}
+        ${field('f-nav5', 'Menú: Oración', s.navOracion || 'Oración')}
+        ${field('f-nav6', 'Menú: Contacto', s.navContacto || 'Contacto')}
+        ${field('f-eye', 'Frase chica arriba', s.heroEyebrow || 'Iglesia en Durango')}
+        ${field('f-bh', 'Botón horarios', s.btnHorarios || 'Ver horarios')}
+        ${field('f-be', 'Botón eventos', s.btnEventos || 'Próximos eventos')}
+        ${field('f-th', 'Título horarios', s.titleHorarios || 'Horarios de la semana')}
+        ${field('f-lh', 'Texto bajo horarios', s.leadHorarios || '', true)}
+        ${field('f-te', 'Título eventos', s.titleEventos || 'Próximos eventos')}
+        ${field('f-le', 'Texto bajo eventos', s.leadEventos || '', true)}
+        ${field('f-tn', 'Título nosotros', s.titleNosotros || 'Quiénes somos')}
+        ${field('f-lp', 'Etiqueta pastor', s.labelPastor || 'Pastor')}
+        ${field('f-to', 'Título oración', s.titleOracion || 'Peticiones de oración')}
+        ${field('f-lo', 'Texto bajo oración', s.leadOracion || '', true)}
+        ${field('f-tc', 'Título contacto', s.titleContacto || 'Contacto y ubicación')}
         ${field('f-gal', 'Galería (una URL de imagen por línea)', (s.gallery || []).join('\n'), true)}
-        <label>Horarios (JSON)</label>
-        <textarea id="f-sch" rows="8">${esc(JSON.stringify(s.schedule || [], null, 2))}</textarea>
+        <h4>Versículos (Reina-Valera)</h4>
+        <div id="verse-rows">${(s.verses || []).map((v, i) => verseRow(i, v)).join('')}</div>
+        <p><button type="button" class="btn btn-ghost" id="add-verse">+ Versículo</button></p>
+        <h4>Horarios (puedes cambiar cualquier nombre)</h4>
+        <div id="sch-rows">${(s.schedule || []).map((x, i) => schRow(i, x)).join('')}</div>
+        <p><button type="button" class="btn btn-ghost" id="add-sch">+ Horario</button></p>
         <p style="margin-top:1rem"><button class="btn btn-gold" id="save-site">Guardar contenido</button></p>`;
       document.getElementById('save-site').onclick = saveSite;
+      document.getElementById('add-sch').onclick = () => {
+        const box = document.getElementById('sch-rows');
+        const i = box.children.length;
+        box.insertAdjacentHTML('beforeend', schRow(i, { day: '', time: '', title: '', place: '', note: '' }));
+      };
+      document.getElementById('add-verse').onclick = () => {
+        const box = document.getElementById('verse-rows');
+        const i = box.children.length;
+        box.insertAdjacentHTML('beforeend', verseRow(i, { text: '', ref: '' }));
+      };
     }
     if (tab === 'eventos') {
       body.innerHTML = `
@@ -316,9 +387,17 @@
   }
 
   async function saveSite() {
-    let schedule;
-    try { schedule = JSON.parse(document.getElementById('f-sch').value); }
-    catch { return toast('El JSON de horarios no es válido'); }
+    const schedule = [...document.querySelectorAll('.sch-item')].map((row) => ({
+      day: row.querySelector('.sch-day').value.trim(),
+      time: row.querySelector('.sch-time').value.trim(),
+      title: row.querySelector('.sch-title').value.trim(),
+      place: row.querySelector('.sch-place').value.trim(),
+      note: row.querySelector('.sch-note').value.trim()
+    })).filter((x) => x.title || x.day);
+    const verses = [...document.querySelectorAll('.verse-item')].map((row) => ({
+      text: row.querySelector('.v-text').value.trim(),
+      ref: row.querySelector('.v-ref').value.trim()
+    })).filter((x) => x.text);
     const gallery = document.getElementById('f-gal').value.split('\n').map((x) => x.trim()).filter(Boolean);
     site = (await api('/site', {
       method: 'PUT',
@@ -338,7 +417,25 @@
         whatsapp: document.getElementById('f-wa').value,
         facebook: document.getElementById('f-fb').value,
         instagram: document.getElementById('f-ig').value,
-        gallery, schedule
+        navInicio: document.getElementById('f-nav1').value,
+        navHorarios: document.getElementById('f-nav2').value,
+        navEventos: document.getElementById('f-nav3').value,
+        navNosotros: document.getElementById('f-nav4').value,
+        navOracion: document.getElementById('f-nav5').value,
+        navContacto: document.getElementById('f-nav6').value,
+        heroEyebrow: document.getElementById('f-eye').value,
+        btnHorarios: document.getElementById('f-bh').value,
+        btnEventos: document.getElementById('f-be').value,
+        titleHorarios: document.getElementById('f-th').value,
+        leadHorarios: document.getElementById('f-lh').value,
+        titleEventos: document.getElementById('f-te').value,
+        leadEventos: document.getElementById('f-le').value,
+        titleNosotros: document.getElementById('f-tn').value,
+        labelPastor: document.getElementById('f-lp').value,
+        titleOracion: document.getElementById('f-to').value,
+        leadOracion: document.getElementById('f-lo').value,
+        titleContacto: document.getElementById('f-tc').value,
+        gallery, schedule, verses
       })
     })).site;
     renderSite();
