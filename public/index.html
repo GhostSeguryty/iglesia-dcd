@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discipulado Cristiano de Durango</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="toast-box"></div>
+
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="#inicio">
+        <span class="cross">✝</span>
+        <span id="brand-name">Discipulado Cristiano de Durango</span>
+      </a>
+      <nav class="nav" id="main-nav">
+        <a href="#inicio">Inicio</a>
+        <a href="#horarios">Horarios</a>
+        <a href="#eventos">Eventos</a>
+        <a href="#nosotros">Nosotros</a>
+        <a href="#oracion">Oración</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <div class="auth-mini" id="auth-mini">
+        <button class="linkish" id="open-login">Acceso</button>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menú">☰</button>
+    </div>
+    <form class="login-strip hidden" id="login-strip">
+      <p id="login-hint">Inicia sesión para editar la página</p>
+      <input type="text" id="login-user" placeholder="Usuario" autocomplete="username">
+      <input type="password" id="login-pass" placeholder="Contraseña" autocomplete="current-password">
+      <button type="submit" class="btn btn-gold">Entrar</button>
+      <button type="button" class="btn btn-ghost" id="close-login">Cerrar</button>
+      <p class="err" id="login-err"></p>
+    </form>
+    <form class="login-strip hidden" id="setup-strip">
+      <p>Primera vez: crea tu usuario de administrador</p>
+      <input type="text" id="setup-name" placeholder="Tu nombre">
+      <input type="text" id="setup-user" placeholder="Usuario">
+      <input type="password" id="setup-pass" placeholder="Contraseña (mín. 6)">
+      <button type="submit" class="btn btn-gold">Crear admin</button>
+      <p class="err" id="setup-err"></p>
+    </form>
+  </header>
+
+  <section class="hero" id="inicio">
+    <div class="hero-overlay"></div>
+    <div class="wrap hero-content">
+      <p class="eyebrow">Iglesia en Durango</p>
+      <h1 id="hero-title">Discipulado Cristiano de Durango</h1>
+      <p class="tagline" id="hero-tagline">Una familia que camina con Cristo</p>
+      <blockquote class="verse-hero">
+        <p id="hero-verse"></p>
+        <cite id="hero-ref"></cite>
+      </blockquote>
+      <div class="hero-actions">
+        <a class="btn btn-gold" href="#horarios">Ver horarios</a>
+        <a class="btn btn-light" href="#eventos">Próximos eventos</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="verse-ticker" id="verse-ticker"></section>
+
+  <section class="section" id="horarios">
+    <div class="wrap">
+      <h2>Horarios de la semana</h2>
+      <p class="lead">Hay un espacio para cada edad y para toda la familia.</p>
+      <div class="cards" id="schedule-grid"></div>
+    </div>
+  </section>
+
+  <section class="section alt" id="eventos">
+    <div class="wrap">
+      <h2>Próximos eventos</h2>
+      <p class="lead">El pastor y el administrador pueden actualizar esta sección cuando quieran.</p>
+      <div class="cards" id="events-grid"></div>
+    </div>
+  </section>
+
+  <section class="section" id="nosotros">
+    <div class="wrap two-col">
+      <div>
+        <h2>Quiénes somos</h2>
+        <p id="about-text"></p>
+        <div class="pastor-card">
+          <div class="pastor-photo" id="pastor-photo">✝</div>
+          <div>
+            <p class="eyebrow">Pastor</p>
+            <h3 id="pastor-name">Lic. Otto Hugo Magallan</h3>
+            <p id="pastor-bio"></p>
+          </div>
+        </div>
+      </div>
+      <div class="gallery" id="gallery"></div>
+    </div>
+  </section>
+
+  <section class="section goldish" id="oracion">
+    <div class="wrap narrow">
+      <h2>Peticiones de oración</h2>
+      <p class="lead">Déjanos tu petición. El equipo pastoral la verá en el panel.</p>
+      <form id="prayer-form" class="form">
+        <input type="text" id="prayer-name" placeholder="Tu nombre" required minlength="2">
+        <textarea id="prayer-msg" rows="4" placeholder="¿Por qué quieres que oremos?" required minlength="4"></textarea>
+        <button class="btn btn-gold" type="submit">Enviar petición</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="section" id="contacto">
+    <div class="wrap">
+      <h2>Contacto y ubicación</h2>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <p><strong>Dirección</strong></p>
+          <p id="contact-address"></p>
+          <p><strong>Teléfono</strong></p>
+          <p id="contact-phone">Se publicará desde el panel</p>
+          <p><strong>Correo</strong></p>
+          <p id="contact-email">Se publicará desde el panel</p>
+          <p id="contact-social"></p>
+          <a id="maps-link" class="btn btn-gold hidden" target="_blank" rel="noopener">Abrir en mapas</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="wrap">
+      <p id="footer-name">Discipulado Cristiano de Durango</p>
+      <p>Jesucristo es el Señor.</p>
+    </div>
+  </footer>
+
+  <aside class="panel hidden" id="admin-panel">
+    <div class="panel-head">
+      <h3>Panel de edición</h3>
+      <div>
+        <span id="admin-who"></span>
+        <button class="btn btn-ghost" id="logout-btn">Salir</button>
+        <button class="btn btn-ghost" id="close-panel">Cerrar</button>
+      </div>
+    </div>
+    <div class="panel-tabs">
+      <button data-tab="contenido" class="active">Contenido</button>
+      <button data-tab="eventos">Eventos</button>
+      <button data-tab="peticiones">Peticiones</button>
+      <button data-tab="visitas">Visitas e IPs</button>
+    </div>
+    <div class="panel-body" id="panel-body"></div>
+  </aside>
+
+  <script src="script.js"></script>
+</body>
+</html>
